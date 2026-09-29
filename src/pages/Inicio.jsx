@@ -11,30 +11,42 @@ function Inicio() {
       <header>
         <h1>Servicios</h1>
 
-        <Link to="/login">
-          Iniciar sesión
-        </Link>
+        <div>
+          <Link to="/login">
+            Iniciar sesión
+          </Link>
+
+          {" | "}
+
+          <Link to="/agregar-servicio">
+            Agregar servicio
+          </Link>
+        </div>
       </header>
 
       <main>
-        <h2>Nuestros servicios</h2>
+        <h2>Lista de servicios</h2>
 
         {servicios && servicios.length > 0 ? (
           <div>
             {servicios.map((servicio) => (
               <TarjetaServicio
-                key={servicio.id}
-                titulo={servicio.titulo}
-                descripcion={servicio.descripcion}
+                key={servicio.id || servicio.codigo}
+                titulo={servicio.nombre}
+                descripcion={
+                  servicio.descripcion ||
+                  servicio.observaciones ||
+                  "Sin descripción"
+                }
                 precio={servicio.precio}
-                onSeleccionar={() => {
-                  console.log("Servicio seleccionado:", servicio);
-                }}
+                onSeleccionar={() =>
+                  console.log("Servicio seleccionado:", servicio)
+                }
               />
             ))}
           </div>
         ) : (
-          <p>No hay servicios disponibles.</p>
+          <p>No hay servicios registrados.</p>
         )}
       </main>
     </div>
